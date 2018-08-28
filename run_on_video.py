@@ -20,7 +20,7 @@ from detection import get_centers, plot_centers, plot_fit_lines
 from lines import Line
 from tools import write_text_on_image, num2str
 
-video_file = 'project_video.mp4'
+video_file = 'data/project_video.mp4'
 DEFAULT_NUM_SLICES = 9  # Divison of warped binary mask into horizontal slices
 kernel_width = 50       # Sliding window for line detection
 
@@ -55,7 +55,10 @@ cnt = 0
 while(cap.isOpened()):
     ret, img = cap.read()
     
-    # Correct for camera distortion    
+    if img is None:
+        break
+
+    # Correct for camera distortion
     img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
     img = cv2.undistort(img, mtx, dist, None, mtx)
     [rows, cols, dims] = img.shape

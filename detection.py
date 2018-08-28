@@ -219,7 +219,7 @@ def get_centers(binary_img,
     ''' 
     # Get height of image slices
     [rows, cols] = binary_img.shape
-    height = rows/num_slices
+    height = int(rows/num_slices)
     
     centers_left = []
     centers_right = []

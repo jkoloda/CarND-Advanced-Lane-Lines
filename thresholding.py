@@ -110,7 +110,7 @@ def adaptive_white_thresh(img, ref_img, num_slices, thresh_offset=50):
     
     [rows, cols, dims] = ref_img.shape
     mask = np.zeros_like(img[:,:,0])
-    slice_height = rows/num_slices
+    slice_height = int(rows/num_slices)
     for ii in range(0, num_slices):
         # Extract slice
         ref_img_slice_r = ref_img[ii*slice_height:(ii+1)*slice_height,:,0].astype(np.float32)
@@ -126,8 +126,8 @@ def adaptive_white_thresh(img, ref_img, num_slices, thresh_offset=50):
         
         ref_mask_left = np.copy(ref_mask)
         ref_mask_right = np.copy(ref_mask)
-        ref_mask_left[:,ref_mask.shape[1]/2:] = False
-        ref_mask_right[:,:ref_mask.shape[1]/2] = False
+        ref_mask_left[:,int(ref_mask.shape[1]/2):] = False
+        ref_mask_right[:,:int(ref_mask.shape[1]/2)] = False
                         
         # Extract reference whiteness
         ref_mean_img_slice = (ref_img_slice_r + ref_img_slice_g + ref_img_slice_b)/3.0
@@ -180,7 +180,7 @@ def adaptive_yellow_thresh(img, ref_img, num_slices, thresh_mult=1.5):
     
     [rows, cols, dims] = ref_img.shape
     mask = np.zeros_like(img[:,:,0])
-    slice_height = rows/num_slices
+    slice_height = int(rows/num_slices)
     for ii in range(0, num_slices):
         # Extract slice
         ref_img_slice_r = ref_img[ii*slice_height:(ii+1)*slice_height,:,0].astype(np.float32)
@@ -196,8 +196,8 @@ def adaptive_yellow_thresh(img, ref_img, num_slices, thresh_mult=1.5):
         
         ref_mask_left = np.copy(ref_mask)
         ref_mask_right = np.copy(ref_mask)
-        ref_mask_left[:,ref_mask.shape[1]/2:] = False
-        ref_mask_right[:,:ref_mask.shape[1]/2] = False
+        ref_mask_left[:,int(ref_mask.shape[1]/2):] = False
+        ref_mask_right[:,:int(ref_mask.shape[1]/2)] = False
         
         # Extract yellowness ratio
         yellow_ratio = (ref_img_slice_r + ref_img_slice_g)/(ref_img_slice_b + EPSILON)

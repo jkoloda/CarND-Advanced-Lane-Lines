@@ -3,4 +3,4 @@ build/
 tags/
 .editorconfig
 .DS_Store
-Ipopt-3.12.7/
+__pycache__/
